@@ -1,11 +1,10 @@
 #!/bin/sh
-# Sumário: Script de instalação fácil em Debian 9.x com o Zabbix 4.0.x e MySQL 8.x
-# Autor: Cláudio Lemes
-# Contato: 62 99666-0607
+# SumÃ¡rio: Script de instalaÃ§Ã£o fÃ¡cil em Debian 9.x com o Zabbix 4.0.x e MySQL 8.x
+# Autor: ClÃ¡udio Lemes
 # Data: 13/06/2019
 
 
-# Instalando os repositórios atuais:
+# Instalando os repositÃ³rios atuais:
 apt-get install sudo -y 
 
 set -e
@@ -20,14 +19,14 @@ dpkg -i zabbix-release_4.0-2+stretch_all.deb
 
 apt update
 
-# Versão 8.0 do MySQL
+# VersÃ£o 8.0 do MySQL
 MYSQL_VERSION=8.0
 MYSQL_PASSWD=brasil@1919 # ALTERE ESSA SENHA!!
 ZABBIX_PASSWD=brasil1919 # ALTERE ESSA SENHA!!
 [ -z "${MYSQL_PASSWD}" ] && MYSQL_PASSWD=mysql
 [ -z "${ZABBIX_PASSWD}" ] && ZABBIX_PASSWD=zabbix
 
-# Bloco de instalação do Zabbix 4.0 com MySQL 8.x
+# Bloco de instalaÃ§Ã£o do Zabbix 4.0 com MySQL 8.x
 zabbix_server_install()
 {
   cat <<EOF | sudo debconf-set-selections mysql-server-${MYSQL_VERSION} mysql-server/root_password password ${MYSQL_PASSWD} mysql-server-${MYSQL_VERSION} mysql-server/root_password_again password ${MYSQL_PASSWD} 
@@ -62,7 +61,7 @@ EOF
   # Pula a etapa do setup.php do Zabbix
   cat <<EOF | sudo tee /etc/zabbix/zabbix.conf.php
 <?php
-// Arquivo de configuração do Zabbix.
+// Arquivo de configuraÃ§Ã£o do Zabbix.
 global \$DB;
 
 \$DB['TYPE']     = 'MYSQL';
